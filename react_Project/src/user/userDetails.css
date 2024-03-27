@@ -1,0 +1,33 @@
+.user-details {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-details h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.user-details div {
+    margin-bottom: 10px;
+}
+
+.user-details strong {
+    font-weight: bold;
+}
+
+.user-details a {
+    display: block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.user-details a:hover {
+    text-decoration: underline;
+}
