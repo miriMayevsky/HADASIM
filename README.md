@@ -3,17 +3,17 @@
 ## miri mayevsky
 
 This project uses MongoDB, Node.js, React to manage user information. It provides functionalities for:
-- geting all users
-- geting details user by id
+- getting all users
+- getting details user by id
 - Adding new users
 - Updating users details
 - Deleting users
 - Adding new vaccination  
-- geting vaccination by id
+- getting vaccination by id
 - Updating vaccinations details
 - Deleting vaccinations
 - Adding new Corona disease  
-- geting Corona disease by id
+- getting Corona disease by id
 - Updating Corona disease details
 - Deleting Corona disease
 
