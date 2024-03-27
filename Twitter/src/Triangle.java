@@ -39,12 +39,17 @@ public class Triangle {
             }
 
         } else {
+            //פחות השורה הראשונה והאחרונה
             height -= 2;
+            //מספר השורות למילוי פחות מספר הספרות האי זוגיות בטווח 3 עד הרוחב
+            //כמה שורות מיותרות יש לחלק בין הספרות
             spare = (height - (width - 3) / 2);
+            //שארית מוסיפים לשורות העליונות
             rest = spare % ((width - 3) / 2);
+            //מס שורות שווה
             same = spare / ((width - 3) / 2);
             System.out.println(spare);
-
+           //מס רווחים בשורה ראשונה
             for (int i = 0; i < width / 2; i++) {
                 System.out.print(" ");
             }
@@ -52,18 +57,21 @@ public class Triangle {
             System.out.println();
 
             newWidth += 2;
+            //מספר רווחים בשורות השארית
             for (int j = 0; j < rest; j++) {
                 for (int i = 0; i < (width - newWidth) / 2; i++) {
                     System.out.print(" ");
                 }
+                //מספר כוכביות בשורות השארית
                 for (int i = 0; i < newWidth; i++) {
                     System.out.print("*");
 
                 }
                 System.out.println();
             }
+            //הדפסת שאר השורות
             while (newWidth < width) {
-
+                 //הדפסת השורות עם מספר שורות שווה בין הספרות
                 for (int j = 0; j <= same; j++) {
                     for (int i = 0; i < (width - newWidth) / 2; i++) {
                         System.out.print(" ");
@@ -74,9 +82,11 @@ public class Triangle {
                     }
                     System.out.println();
                 }
+                //עולה לספרה האי זוגית הבאה
                 newWidth += 2;
 
             }
+            //הדפסת שורה אחרונה
             for (int i = 0; i < width; i++) {
                 System.out.print("*");
             }

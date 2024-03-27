@@ -10,9 +10,9 @@ public class Square {
 
     public void print() {
         if (Math.abs(height-width)>5)
-            System.out.println(height*width+" שתח מלבן ");
+            System.out.println(height*width+" שטח מלבן ");
         else
-            System.out.println((height+width)*2+" הקיף ריבןע ");
+            System.out.println((height+width)*2+" היקף ריבוע ");
     }
 }
 
