@@ -30,6 +30,8 @@ const UpdateVaccination = () => {
         }
     }, [Vaccinations[index], reset]);
 
+console.log(Vaccinations[index]);
+
     const save = (data) => {
         UpdateVaccinations(idNumber, index, data)
             .then((res) => {
