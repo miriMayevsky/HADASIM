@@ -26,7 +26,7 @@ export const AddNewDisease = async (req, res) => {
 export const getAll = async (req, res) => {
     try {
         const data = await CoronaModel.find();
-        console.log(data);
+        // console.log(data);
         res.json(data);
     } catch (err) {
         res.status(400).json({ type: "error", message: err.message });
@@ -42,7 +42,7 @@ export const GetById = async (req, res) => {
             return res.status(404).json({ type: 'not found', message: 'User not found' });
         }
         res.json(data);
-        console.log(data);
+        // console.log(data);
     } catch (err) {
         res.status(400).json({ type: "error", message: err.message });
     }

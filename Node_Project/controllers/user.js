@@ -29,7 +29,7 @@ export const addUser = async (req, res) => {
 export const getAllUsers = async (req, res) => {
     try {
         const allUsers = await UserModel.find({});
-        console.log(allUsers);
+        // console.log(allUsers);
         res.json(allUsers);
     } catch (err) {
         res.status(400).json({ type: "error", message: err.message });

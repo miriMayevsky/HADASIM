@@ -10,26 +10,31 @@ import UpdateCorona from './corona/UpdateCorona';
 import UpdateVaccination from './vaccinations/UpdateVaccination';
 import AddCorona from './corona/AddCorona';
 import AddVaccinations from './vaccinations/AddVaccinations';
-
+// import SummaryView from './SummaryView';
+import SummaryView from './SummaryView ';
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path='addUser' element={<AddUser />} />
-          <Route path='/' element={<UsersList/>} />
-          <Route path='userDetails/:idNumber' element={<UserDetails />} />
-          <Route path='coronaDetails/:idNumber' element={<CoronaDetails />} />
-          <Route path='vaccinationDetails/:idNumber' element={<VaccinationsDetails />} />
-          <Route path="updateUser/:idNumber" element={<UpdateUser />} />
-          <Route path="updateCorona/:idNumber/:index" element={<UpdateCorona />} />
-          <Route path="updateVaccinations/:idNumber/:index" element={<UpdateVaccination />} />
-          <Route path="addCorona/:idNumber" element={<AddCorona />} />
-          <Route path="addVaccinations/:idNumber" element={<AddVaccinations />} />
-        </Routes>
+    <>
+      <Router>
+        <div className="App">
+          <Routes>
+            <Route path='addUser' element={<AddUser />} />
+            <Route path='/' element={<UsersList />} />
+            <Route path='userDetails/:idNumber' element={<UserDetails />} />
+            <Route path='coronaDetails/:idNumber' element={<CoronaDetails />} />
+            <Route path='vaccinationDetails/:idNumber' element={<VaccinationsDetails />} />
+            <Route path="updateUser/:idNumber" element={<UpdateUser />} />
+            <Route path="updateCorona/:idNumber/:index" element={<UpdateCorona />} />
+            <Route path="updateVaccinations/:idNumber/:index" element={<UpdateVaccination />} />
+            <Route path="addCorona/:idNumber" element={<AddCorona />} />
+            <Route path="addVaccinations/:idNumber" element={<AddVaccinations />} />
+            <Route path="SummaryView" element={<SummaryView />} />
 
-      </div>
-    </Router>
+          </Routes>
+
+        </div>
+      </Router>
+    </>
   );
 }
 

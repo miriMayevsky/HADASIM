@@ -35,6 +35,12 @@ const UsersList = () => {
             add User</button>
         </Link>
       </div>
+      <div style={{ margin: 20 }}>
+        <Link to="/SummaryView">
+          <button className="btn btn__login">
+          SummaryView </button>
+        </Link>
+      </div>
       {users.map((user, index) => (
         <UserItem key={index} one={user} users={users} setUsers={setUsers} />
 
