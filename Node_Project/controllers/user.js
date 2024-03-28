@@ -1,21 +1,19 @@
 import { UserModel, userValidator } from "../models/user.js";
-import mongoose from 'mongoose';
 import { CoronaModel } from '../models/corona.js'
 import { VaccinationModel } from "../models/vaccination.js";
 
 export const addUser = async (req, res) => {
-    //בודק אם עומד בתנאי סכמת גוי
+    //Checks if the conditions of the Goi schema are met
     let validate = userValidator(req.body);
     if (validate.error)
         return res.status(400).json({ type: "not valid body", message: validate.error.details[0].message });
     let { idNumber } = req.body;
     try {
-        // let sameUser = await UserModel.findOne({ "personalInfo.idNumber": idNumber });
         let sameUser = await UserModel.findOne({ idNumber });
         if (sameUser) {
             return res.status(409).json({ type: "same user", message: "user with same parameters already exists" });
         }
-        //מכניס לסכמת mongoose את המשתמש החדש
+        //create new user
         let newUser = new UserModel({ ...req.body });
         await newUser.save();
         return res.json({ newUser });
@@ -56,16 +54,16 @@ export const getUserById = async (req, res) => {
 export const deleteUser = async (req, res) => {
     let { idNumber } = req.params;
     try {
-        // מחיקת המשתמש
+        //delete user
         let deletedUser = await UserModel.findOneAndDelete({ idNumber });
         if (!deletedUser) {
             return res.status(404).json({ type: 'not found', message: 'user not found with such id' });
         }
 
-        // מחיקת רשומות הקורונה הקשורות למשתמש לפי idNumber
+        //Deleting the corona  of  user by idNumber
         await CoronaModel.deleteMany({ idNumber });
 
-        // מחיקת רשומות החיסונים הקשורות למשתמש לפי idNumber
+        // Deleting the Vaccination  of  user by idNumber
         await VaccinationModel.deleteMany({ idNumber });
 
         res.json(deletedUser);

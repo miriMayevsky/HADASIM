@@ -18,14 +18,14 @@ const UsersList = () => {
         }
       })
       .catch((err) => {
-        alert("לא ניתן לטעון את המוצרים");
+        alert("Unable to load the details");
         console.error("eror:" + err);
         console.log("err" + err);
       });
   }, []);
 
   if (!users) {
-    return <div>No data available</div>; // הצגת הודעה כאשר אין נתונים
+    return <div>No data available</div>; // Display a message when there is no data
   }
   return (
     <>

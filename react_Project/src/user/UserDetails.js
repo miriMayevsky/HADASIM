@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import { getUserByParameter } from "./UserApi";
@@ -17,10 +16,15 @@ const UserDetails = () => {
     useEffect(() => {
         getUserByParameter(idNumber)
             .then((res) => {
-                setUsers(res.data);
+                try {
+                    setUsers(res.data);
+                  }
+                  catch (error) {
+                    console.error("Error parsing JSON:", error);
+                  }
             })
             .catch((err) => {
-                alert("לא ניתן לטעון את הפרטים");
+                alert("Unable to load the details");
                 console.error("error:" + err);
             });
     }, [idNumber]);
@@ -46,7 +50,7 @@ const UserDetails = () => {
                 <div>
                     <button onClick={() => navigate(`/addVaccinations/${idNumber}`)}> Add Vaccinations</button>
                 </div>
-               
+
                 <Link to={"/"}>
                     back
                 </Link>

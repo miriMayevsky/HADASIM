@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
-let autoIncrementIndex = 0;
-
+//  This test checks that the data stored in the database meets the requirements mongoose
 const VaccinationSchema = new mongoose.Schema({
 
     idNumber: {
@@ -15,7 +14,6 @@ const VaccinationSchema = new mongoose.Schema({
     date: {
         type: Date,
         required: [true, "date field is required"],
-        // unique: { index: { unique: true }, message: "Duplicate positiveTestDate for the same idNumber" },  
         max: [new Date(), "datePositive cannot be in the future"],
         min: ['2021-01-01', "Date should be after 2021 "],
     },
@@ -44,14 +42,4 @@ VaccinationModel.createCollection().then(function (collection) {
 }).catch(function (err) {
     console.log('Error creating Vaccination Collection:', err);
 });
-// //להעלות את ינדקס ב1
-// VaccinationModel.findOne({}, {}, { sort: { 'index': -1 } }, function (err, lastVaccination) {
-//     if (err) {
-//         console.error("Error finding last vaccination:", err);
-//         return;
-//     }
-//     if (lastVaccination) {
-//         autoIncrementIndex = lastVaccination.index;
-//     }
-//     console.log("autoIncrementIndex set to:", autoIncrementIndex);
-// });
+

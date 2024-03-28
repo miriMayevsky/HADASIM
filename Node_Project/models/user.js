@@ -1,100 +1,7 @@
-// import mongoose from "mongoose";
-// import Joi from "joi";
-
-// // mongoose בדיקה זו מטרתה לוודא שהנתונים שנשמרים בבסיס הנתונים עונים לדרישות 
-// const userSchema = new mongoose.Schema({
-//     personalInfo: {
-//       firstName:String,
-//     //  { type: String, required: true },
-//       lastName: { type: String, required: false },
-//       idNumber: { type: String, required: false },
-//       password: { type: String, required: false },
-//       role:{type:String,default:'USER'},
-//       address: {
-//         city: { type: String, required: false },
-//         street: { type: String, required: false },
-//         number: { type: String, required: false }
-//       },
-//       birthDate: { type: Date, required: false },
-//       phone: { type: String, required: false },
-//       mobilePhone: { type: String, required: false }
-//     },
-//     coronaInfo: {
-//       vaccines: [{
-//         date: { type: Date, required: false },
-//         // יַצרָן
-//         manufacturer: { type: String, required: false }
-//       }],
-//       positiveTestDate: { type: Date },
-//     //   תאריך התאוששות
-//       recoveryDate: { type: Date }
-//     }
-//   });
-
-// export const UserModel=mongoose.model("users",userSchema);
-
-
-// // Joi סכמה לבדיקה שהנתונים שנשלחים מהשרת תקינים ומתאימים לעיבוד נוסף 
-// export const userValidatorForLogin = (_user) => {
-
-//     const schema = Joi.object({
-//         idNumber: Joi.string().pattern(new RegExp('^[0-9]{9}$')).required(),
-//         password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,15}$')).required()
-//     });
-//     return schema.validate(_user);
-// }
-
-// export const userValidator = (_user) => {
-//     const schema = Joi.object({
-//         personalInfo: Joi.object({
-//             firstName: Joi.string(),
-//             // .required(),
-//             lastName: Joi.string(),
-//             // .required(),
-//             idNumber: Joi.string().pattern(new RegExp('^[0-9]{9}$')),
-//             // .required(),
-//             password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,15}$')),
-//             // .required(),
-//             role: Joi.string().valid("USER","ADMIN"),
-//             // .required(),
-//             address: Joi.object({
-//               city: Joi.string(),
-//             //   .required(),
-//               street: Joi.string(),
-//             //   .required(),
-//               number: Joi.string()
-//             //   .required()
-//             }),
-//             // .required(),
-//             birthDate: Joi.date(),
-//             // .required(),
-//             phone: Joi.string().pattern(new RegExp('^[0-9]{10}$')),
-//             // .required(),
-//             mobilePhone: Joi.string()
-//             // .required()
-//           }),
-//           coronaInfo: Joi.object({
-//             vaccines: Joi.array().items(Joi.object({
-//               date: Joi.date(),
-//             //   .required(),
-//               manufacturer: Joi.string().required()
-//             })),
-//             // .required(),
-//             // תאריך תוצאה חיובית במידה והיה חולה 
-//             positiveTestDate: Joi.date().optional(),
-//                 //  במידה והיה חולה תאריך התאוששות
-
-//             recoveryDate: Joi.date().optional()
-//           })
-//         });
-
-//     return schema.validate(_user);
-// };
-
 import mongoose from "mongoose";
 import Joi from "joi";
 
-// mongoose בדיקה זו מטרתה לוודא שהנתונים שנשמרים בבסיס הנתונים עונים לדרישות 
+//  This test checks that the data stored in the database meets the requirements mongoose
 const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
@@ -109,11 +16,13 @@ const userSchema = new mongoose.Schema({
     required: [true, "idNumber field is required"],
     unique: true,
     minLength: [9, "The minimum digitis are 9"],
-    maxLength: [9, "The maximum digitis are 9"]
+    maxLength: [9, "The maximum digitis are 9"],
   },
   birthDate: {
     type: Date,
     max: [new Date(), "birthDate cannot be in the future"],
+    min: [new Date("1900-01-01"), "birthDate must be after 1900"],
+
   },
   address: {
     city: { type: String },
@@ -122,7 +31,7 @@ const userSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-   
+
   },
   mobilePhone: {
     type: String,
@@ -137,9 +46,9 @@ userSchema.method("toJSON", function () {
   object.id = _id;
   return object;
 });
-
+//create document 
 export const UserModel = mongoose.model("users", userSchema);
-
+//create colection 
 UserModel.createCollection().then(function (collection) {
   console.log('users Collection is created!');
 }).catch(function (err) {
@@ -147,8 +56,7 @@ UserModel.createCollection().then(function (collection) {
 });
 
 
-// Joi סכמה לבדיקה שהנתונים שנשלחים מהשרת תקינים ומתאימים לעיבוד נוסף 
-
+// Joi schema to check that the data sent from the server is correct
 export const userValidator = (_user) => {
   const schema = Joi.object({
     firstName: Joi.string().required(),

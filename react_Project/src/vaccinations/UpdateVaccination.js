@@ -14,9 +14,13 @@ const UpdateVaccination = () => {
     useEffect(() => {
         GetById(idNumber)
             .then((res) => {
-                if (res?.data?.length) {
-                    console.log(res.data);
+                try {
                     setVaccinations(res.data);
+                    console.log(res.data);
+
+                }
+                catch (error) {
+                    console.error("Error parsing JSON:", error);
                 }
             })
             .catch((err) => {
@@ -52,8 +56,15 @@ const UpdateVaccination = () => {
                 navigate(`/userDetails/${idNumber}`);
             })
             .catch((err) => {
-                alert(JSON.stringify(err.response.data));
-                console.log(err.response);
+                if (err.response && err.response.data && err.response.data.message) {
+                    alert(err.response.data.message);
+                }
+                else if (err.response && err.response.data) {
+                    alert(err.response.data);
+    
+                } else {
+                    alert("An error occurred while update the Vaccination. Please try again later.");
+                }
             });
     };
 
@@ -70,7 +81,6 @@ const UpdateVaccination = () => {
                 })} type="date" />
                 {errors.date && <p>{errors.date.message}</p>}
                 <div style={{ marginBottom: "10px" }}></div>
-
 
                 <select
                     {...register('manufacturer', { required: 'Field is required' })}

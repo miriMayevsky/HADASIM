@@ -39,17 +39,17 @@ public class Triangle {
             }
 
         } else {
-            //פחות השורה הראשונה והאחרונה
+            //Height minus the first and last row
             height -= 2;
-            //מספר השורות למילוי פחות מספר הספרות האי זוגיות בטווח 3 עד הרוחב
-            //כמה שורות מיותרות יש לחלק בין הספרות
+            //The number of lines to fill minus the number of odd digits in the range 3 to the width
+            //How many unnecessary lines should be divided between the digits
             spare = (height - (width - 3) / 2);
-            //שארית מוסיפים לשורות העליונות
+            //rest is added to the top rows
             rest = spare % ((width - 3) / 2);
-            //מס שורות שווה
+            //Number of rows is equal
             same = spare / ((width - 3) / 2);
             System.out.println(spare);
-           //מס רווחים בשורה ראשונה
+            //Number of spaces in the first row
             for (int i = 0; i < width / 2; i++) {
                 System.out.print(" ");
             }
@@ -57,21 +57,21 @@ public class Triangle {
             System.out.println();
 
             newWidth += 2;
-            //מספר רווחים בשורות השארית
+            //Number of spaces in the rest rows
             for (int j = 0; j < rest; j++) {
                 for (int i = 0; i < (width - newWidth) / 2; i++) {
                     System.out.print(" ");
                 }
-                //מספר כוכביות בשורות השארית
+                //Number of * in the rest rows
                 for (int i = 0; i < newWidth; i++) {
                     System.out.print("*");
 
                 }
                 System.out.println();
             }
-            //הדפסת שאר השורות
+            //print the rows
             while (newWidth < width) {
-                 //הדפסת השורות עם מספר שורות שווה בין הספרות
+              //printing the lines with an equal number of lines between the digits
                 for (int j = 0; j <= same; j++) {
                     for (int i = 0; i < (width - newWidth) / 2; i++) {
                         System.out.print(" ");
@@ -82,11 +82,11 @@ public class Triangle {
                     }
                     System.out.println();
                 }
-                //עולה לספרה האי זוגית הבאה
-                newWidth += 2;
+            // next odd digit
+                 newWidth += 2;
 
             }
-            //הדפסת שורה אחרונה
+           //print last line
             for (int i = 0; i < width; i++) {
                 System.out.print("*");
             }

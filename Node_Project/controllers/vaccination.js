@@ -1,4 +1,3 @@
-
 import { UserModel, userValidator } from "../models/user.js";
 import { VaccinationModel } from '../models/vaccination.js'
 
@@ -10,16 +9,18 @@ export const AddNewVaccination = async (req, res) => {
             return res.status(404).json({ type: 'not found', message: 'user not found' });
         }
 
-        let maxVaccinations = 4;
-        // בודק אם נגיע למספר המקסימלי
+        const maxVaccinations = 4;
+
+        // Checks if the maximum number has been reached 
         const count = await VaccinationModel.countDocuments({ idNumber });
         if (count < maxVaccinations) {
 
-            // מוצא את החיסון האחרון
+            // Finds the last vaccine 
             const lastVaccination = await VaccinationModel.findOne({ idNumber }).sort({ index: -1 });
             let lastIndex = lastVaccination ? lastVaccination.index : 0;
 
-            let newVaccination = new VaccinationModel({idNumber,idPerson: user.id, ...req.body,index: lastIndex + 1});
+            //create object
+            let newVaccination = new VaccinationModel({ idNumber, idPerson: user.id, ...req.body, index: lastIndex + 1 });
             await newVaccination.save();
             console.log(newVaccination);
             return res.json({ newVaccination });

@@ -6,8 +6,6 @@ import { useNavigate } from 'react-router-dom';
 
 const UserItem = ({ one, users, setUsers }) => {
     let navigate = useNavigate();
-    //מחיקת מוצר
-    const [showAlert, setShowAlert] = useState(false);
 
     const handleDelete = (idNumber) => {
         const result = window.confirm("Are you sure you want to delete this item?");
@@ -15,11 +13,15 @@ const UserItem = ({ one, users, setUsers }) => {
             // Delete the item
             DeleteUserByParameter(idNumber)
                 .then((res) => {
-                    console.log(res);
-                    alert("Item deleted successfully");
-
-                    // Update the state to remove the deleted user
-                    setUsers(prevUsers => prevUsers.filter(user => user.idNumber !== idNumber));
+                    try {
+                        console.log(res);
+                        alert("Item deleted successfully");
+    
+                        // Update the state to remove the deleted user
+                        setUsers(prevUsers => prevUsers.filter(user => user.idNumber !== idNumber));                      }
+                      catch (error) {
+                        console.error("Error parsing JSON:", error);
+                      }
                 }).catch(err => {
                     alert("Error deleting item:", err);
                 });
@@ -39,17 +41,6 @@ const UserItem = ({ one, users, setUsers }) => {
             <button onClick={() =>   handleDelete(one.idNumber)}> delete user</button>
 
         </div>
-
-
-
-
-
-
-
-
-
-
-
     </>
     );
 };
